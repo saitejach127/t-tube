@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Torrent Stream</title>
+</head>
+<body>
+    Welcome to tstream <br>
+    Torrent Steaming with web seed hence no interrupt <br>
+    <input type="text" id="hash" >
+    <input type="submit" id="submit" ><br>
+    <form action="/upload/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit">
+    </form>
+    <script>
+        var submit = document.getElementById('submit');
+        var hash = document.getElementById('hash');
+        submit.onclick = () => {
+            window.location = window.location.origin + "/stream?hash=" + hash.value;
+        }
+    </script>
+</body>
+</html>
