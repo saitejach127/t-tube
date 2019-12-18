@@ -26,6 +26,10 @@ app.get('/',(req,res) => {
     res.render('home');
 })
 
+app.get('/upload', (req,res) => {
+    res.render('upload');
+});
+
 app.post('/upload', (req,res) => {
     upload(req,res, (err) => {
         var msg = {};
