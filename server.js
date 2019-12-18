@@ -3,8 +3,10 @@ var createTorrent = require('create-torrent');
 var fs = require('fs');
 var multer = require('multer');
 var cors = require('cors');
-var path = require('path');
 var app = express();
+var IPFS = require('ipfs-api');
+
+var ipfs = IPFS('ipfs.infura.io', '5001', { protocol : 'https' });
 
 app.use('/static',express.static("public"));
 app.set('view engine', 'ejs');
@@ -41,19 +43,22 @@ app.post('/upload', (req,res) => {
             createTorrent('public/uploads/'+ req.file.originalname, {urlList : "http://t-tube.herokuapp.com/static/uploads/" + req.file.originalname}, (err, torrent) => {
                 fs.writeFile('public/torrents/' + req.file.originalname +'.torrent',torrent, () => { console.log('created') });
             });
+
+            fs.readFile('public/uploads/' + req.file.originalname, (err,data) => {
+                var bufferData = new Buffer.from(data);
+                ipfs.files.add(bufferData, (err, result) => {
+                    console.log(result);
+                    msg.hash = result[0].hash;
+                });
+            });
         }
-        res.render('upload', msg);
+        res.render('home', msg);
     });
 });
 
 app.get('/stream', (req,res) => {
     console.log(req.query);
-    var hash = req.query["hash"];
-    let buffer;
-    fs.readFile('public/torrents/' + hash + '.torrent', (err,data) => {
-        buffer = data
-        res.render('stream', { torrent:buffer });
-    });
+    res.render('stream');
 });
 
 app.listen(process.env.PORT || 3000, () => { console.log("Server on 3000") });
