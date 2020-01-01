@@ -40,7 +40,7 @@ app.post('/upload', (req,res) => {
         } else {
             msg.message = "success";
 
-            createTorrent('public/uploads/'+ req.file.originalname, {urlList : "http://t-tube.herokuapp.com/static/uploads/" + req.file.originalname}, (err, torrent) => {
+            createTorrent('public/uploads/'+ req.file.originalname, {urlList : "https://t-tube.herokuapp.com/static/uploads/" + req.file.originalname}, (err, torrent) => {
                 fs.writeFile('public/torrents/' + req.file.originalname +'.torrent',torrent, () => { console.log('created') });
             });
 
