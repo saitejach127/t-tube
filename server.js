@@ -61,5 +61,5 @@ app.get('/stream', (req,res) => {
     res.render('stream');
 });
 
-app.listen(process.env.PORT || 3000, () => { console.log("Server on 3000") });
+app.listen(process.env.PORT || 5000, () => { console.log("Server on 3000") });
 // var server = app.listen(3000, '192.168.1.35',() => { console.log("Server on 3000")  });

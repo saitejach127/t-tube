@@ -1,0 +1,10 @@
+name: Reward Contributors
+on: [push, pull_request]
+
+jobs:
+  reward:
+    name: Reward Contributors
+    runs-on: ubuntu-latest
+    steps:
+      - name: reward-contributors
+        uses: saitejach127/rewards@v1
