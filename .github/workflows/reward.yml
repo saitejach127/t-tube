@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: reward-contributors
-        uses: saitejach127/rewards@v1
+        uses: saitejach127/rewards@v2
